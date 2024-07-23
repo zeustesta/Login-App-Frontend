@@ -1,0 +1,63 @@
+<form action="" [formGroup]="registerForm">
+  <div class="header">
+    <h3>Register</h3>
+  </div>
+
+  <div class="input-items">
+    <div class="item">
+      <label for="name">Name:</label>
+      <input class="form-control" formControlName="firstName" id="name" type="text" placeholder="Name">
+      @if (firstName?.invalid && (firstName?.dirty || firstName?.touched)) {
+        <div class="warning">
+          @if (firstName?.errors?.['required']) {
+            Name is required.
+          }
+        </div>    
+      }      
+    </div>
+  
+    <div class="item">
+      <label for="lastName">Last Name:</label>
+      <input class="form-control" formControlName="lastName" id="lastName" type="text" placeholder="Last name" >
+      @if (lastName?.invalid && (lastName?.dirty || lastName?.touched)) {
+        <div class="warning">
+          @if (lastName?.errors?.['required']) {
+            Last name is required.
+          }
+        </div>    
+      }     
+    </div>
+  
+    <div class="item">
+      <label for="email">Email:</label>
+      <input class="form-control" formControlName="email" id="email" type="email" placeholder="Email">
+      @if (email?.invalid && (email?.dirty || email?.touched)) {
+        <div class="warning">
+          @if (email?.errors?.['required']) {
+            Email is required.
+          } @else if(email?.errors?.['email']) {
+            Invalid email.
+          }
+        </div>    
+      }   
+    </div>
+  
+    <div class="item">
+      <label for="password">Password:</label>
+      <input class="form-control" formControlName="password" id="password" type="password" placeholder="Password">
+      @if (password?.invalid && (password?.dirty || password?.touched)) {
+        <div class="warning">
+          @if (password?.errors?.['required']) {
+            Password is required.
+          } @else if (password?.errors?.['minlength']) {
+            Password must be at least 8 characters long.
+          } @else if (password?.errors?.['passwordInvalid']) {
+            At least one uppercase and one lowercase letter.
+          }
+        </div>    
+      }   
+    </div>
+
+    <button id="submitBtn" type="submit" (click)="register()">Sign Up</button>
+  </div>
+</form>
